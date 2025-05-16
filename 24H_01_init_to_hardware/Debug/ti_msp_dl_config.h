@@ -180,26 +180,26 @@ extern "C" {
 /* Defines for BIN1: GPIOA.12 with pinCMx 34 on package pin 5 */
 #define GPIOA_BIN1_PIN                                          (DL_GPIO_PIN_12)
 #define GPIOA_BIN1_IOMUX                                         (IOMUX_PINCM34)
-/* Port definition for Pin Group ECODER */
-#define ECODER_PORT                                                      (GPIOB)
+/* Port definition for Pin Group ENCODER */
+#define ENCODER_PORT                                                     (GPIOB)
 
 /* Defines for E0A: GPIOB.19 with pinCMx 45 on package pin 16 */
 // pins affected by this interrupt request:["E0A","E1A"]
-#define ECODER_INT_IRQN                                         (GPIOB_INT_IRQn)
-#define ECODER_INT_IIDX                         (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
-#define ECODER_E0A_IIDX                                     (DL_GPIO_IIDX_DIO19)
-#define ECODER_E0A_PIN                                          (DL_GPIO_PIN_19)
-#define ECODER_E0A_IOMUX                                         (IOMUX_PINCM45)
+#define ENCODER_INT_IRQN                                        (GPIOB_INT_IRQn)
+#define ENCODER_INT_IIDX                        (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
+#define ENCODER_E0A_IIDX                                    (DL_GPIO_IIDX_DIO19)
+#define ENCODER_E0A_PIN                                         (DL_GPIO_PIN_19)
+#define ENCODER_E0A_IOMUX                                        (IOMUX_PINCM45)
 /* Defines for E0B: GPIOB.18 with pinCMx 44 on package pin 15 */
-#define ECODER_E0B_PIN                                          (DL_GPIO_PIN_18)
-#define ECODER_E0B_IOMUX                                         (IOMUX_PINCM44)
+#define ENCODER_E0B_PIN                                         (DL_GPIO_PIN_18)
+#define ENCODER_E0B_IOMUX                                        (IOMUX_PINCM44)
 /* Defines for E1A: GPIOB.17 with pinCMx 43 on package pin 14 */
-#define ECODER_E1A_IIDX                                     (DL_GPIO_IIDX_DIO17)
-#define ECODER_E1A_PIN                                          (DL_GPIO_PIN_17)
-#define ECODER_E1A_IOMUX                                         (IOMUX_PINCM43)
+#define ENCODER_E1A_IIDX                                    (DL_GPIO_IIDX_DIO17)
+#define ENCODER_E1A_PIN                                         (DL_GPIO_PIN_17)
+#define ENCODER_E1A_IOMUX                                        (IOMUX_PINCM43)
 /* Defines for E1B: GPIOB.16 with pinCMx 33 on package pin 4 */
-#define ECODER_E1B_PIN                                          (DL_GPIO_PIN_16)
-#define ECODER_E1B_IOMUX                                         (IOMUX_PINCM33)
+#define ENCODER_E1B_PIN                                         (DL_GPIO_PIN_16)
+#define ENCODER_E1B_IOMUX                                        (IOMUX_PINCM33)
 
 /* clang-format on */
 
