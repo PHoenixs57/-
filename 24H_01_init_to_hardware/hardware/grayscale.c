@@ -1,1 +1,2 @@
-hello
+#include "grayscale.h"
+
