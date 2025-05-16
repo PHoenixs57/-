@@ -74,7 +74,7 @@ main.o: ../main.c \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/dl_wwdt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/Ag\ plus/workspace_ccstheia/24H_01_init_to_hardware/OLED/oled.h
+ C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/OLED/oled.h
 
 ti_msp_dl_config.h:
 
@@ -222,4 +222,4 @@ C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h:
 
 C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h:
 
-C:/Users/Ag\ plus/workspace_ccstheia/24H_01_init_to_hardware/OLED/oled.h:
+C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/OLED/oled.h:
