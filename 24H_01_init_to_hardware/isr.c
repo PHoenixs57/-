@@ -39,7 +39,7 @@ void GROUP1_IRQHandler(void)
     }
 }
 
-//定时器的中断服务函数 已配置为1秒的周期
+//定时器的中断服务函数 已配置为10毫秒的周期
 //The timer interrupt service function has been configured to a period of 1 second
 void TIMER_0_INST_IRQHandler(void)
 {
