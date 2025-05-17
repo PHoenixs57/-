@@ -1,48 +1,20 @@
-#ifndef __OLED_H
-#define __OLED_H			  	 
-#include "ti_msp_dl_config.h"
-// #define  u8 unsigned char 
-// #define  u16 unsigned int
-// #define  u32 unsigned int
-#define OLED_CMD  0	//写命令
-#define OLED_DATA 1	//写数据
+#ifndef _oled_h_
+#define _oled_h_
 
-#ifndef GPIO_OLED_PIN_SCL_PORT
-#define GPIO_OLED_PIN_SCL_PORT GPIO_OLED_PORT 
-#endif
+#include <stdint.h>
+#define OLED_ADDRESS 0x3c
 
-#ifndef GPIO_OLED_PIN_SDA_PORT
-#define GPIO_OLED_PIN_SDA_PORT GPIO_OLED_PORT 
-#endif
-
-//----------------------------------------------------------------------------------
-//OLED SSD1306 I2C 时钟SCL
-#define		OLED_SCL_Set()			    (DL_GPIO_setPins(GPIO_OLED_PIN_SCL_PORT, GPIO_OLED_PIN_SCL_PIN))
-#define		OLED_SCL_Clr()				(DL_GPIO_clearPins(GPIO_OLED_PIN_SCL_PORT, GPIO_OLED_PIN_SCL_PIN))
-
-//----------------------------------------------------------------------------------
-//OLED SSD1306 I2C 数据SDA
-#define		OLED_SDA_Set()				(DL_GPIO_setPins(GPIO_OLED_PIN_SDA_PORT, GPIO_OLED_PIN_SDA_PIN))
-#define		OLED_SDA_Clr()			    (DL_GPIO_clearPins(GPIO_OLED_PIN_SDA_PORT, GPIO_OLED_PIN_SDA_PIN))
-				   
-
-//OLED控制用函数
-void delay_ms(unsigned long ms);
-void OLED_ColorTurn(uint8_t i);
-void OLED_DisplayTurn(uint8_t i);
-void OLED_WR_Byte(uint8_t dat,uint8_t cmd);
-void OLED_Set_Pos(uint8_t x, uint8_t y);
-void OLED_Display_On(void);
-void OLED_Display_Off(void);
-void OLED_Clear(void);
-void OLED_ShowChar(uint8_t x,uint8_t y,uint8_t chr,uint8_t sizey);
-uint32_t oled_pow(uint8_t m,uint8_t n);
-void OLED_ShowNum(uint8_t x,uint8_t y,uint32_t num,uint8_t len,uint8_t sizey);
-void OLED_ShowString(uint8_t x,uint8_t y,uint8_t *chr,uint8_t sizey);
-
+void I2C_Configuration(void);
+void I2C_WriteByte(uint8_t addr,uint8_t data);
+void WriteCmd(unsigned char I2C_Command);
+void WriteData(unsigned char I2C_Data);
 void OLED_Init(void);
-#endif  
-	 
+void OLED_SetPos(unsigned char x,unsigned char y);
+void OLED_Fill(unsigned char Fill_Data);
+void OLED_CLS(void);
+void OLED_ON(void);
+void OLED_OFF(void);
+void OLED_ShowStr(unsigned char x,unsigned char y,unsigned char ch[],unsigned char TextSize);
 
-
+#endif
 

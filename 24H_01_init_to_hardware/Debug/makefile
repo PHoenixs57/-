@@ -13,6 +13,7 @@ ORDERED_OBJS += \
 "./ti_msp_dl_config.o" \
 "./startup_mspm0g350x_ticlang.o" \
 "./main.o" \
+"./OLED/delay.o" \
 "./OLED/oled.o" \
 "./hardware/grayscale.o" \
 "./hardware/gyroscpe.o" \
@@ -163,8 +164,8 @@ all: $(OBJS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "main.o" "OLED\oled.o" "hardware\grayscale.o" "hardware\gyroscpe.o" 
-	-$(RM) "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "main.d" "OLED\oled.d" "hardware\grayscale.d" "hardware\gyroscpe.d" 
+	-$(RM) "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "main.o" "OLED\delay.o" "OLED\oled.o" "hardware\grayscale.o" "hardware\gyroscpe.o" 
+	-$(RM) "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "main.d" "OLED\delay.d" "OLED\oled.d" "hardware\grayscale.d" "hardware\gyroscpe.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

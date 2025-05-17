@@ -11,11 +11,13 @@ volatile bool dataReceived = false;
 int main(void)
 {
     SYSCFG_DL_init();
-    // OLED_Init();
-    // OLED_ShowString(8,2,(uint8_t *)"ZHONGJINGYUAN",16);
+    OLED_Init();
+    //	OLED_Fill(0xFF);	Fill with white
+	OLED_Fill(0x00);//Black screen
     // grayscale_init();
     
-    
+    OLED_ShowStr(0,0,(unsigned char*)"Hello world!!",2);
+
     grayscale_start(grayscale_start_str,&rx_count,&dataReceived);
     //OLED_Clear();
     while (1) {
@@ -34,6 +36,7 @@ void UART_0_INST_IRQHandler(void)
                 if(rxBuffer[0]=='$'&&rxBuffer[RX_BUFFER_SIZE-1]=='#')
                 {
                     //OLED_ShowString(8,3,(uint8_t*)rxBuffer, 16);
+                    OLED_ShowStr(0,2,(unsigned char*)rxBuffer,2);
                     grayscale_uart_receive  = 0;
                     for(char i=0;i<8;i++)
                     {
