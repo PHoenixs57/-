@@ -101,6 +101,7 @@ TIMER1.timerPeriod        = "10 ms";
 TIMER1.timerMode          = "PERIODIC";
 TIMER1.interrupts         = ["ZERO"];
 TIMER1.$name              = "ENCODER_TIM0";
+TIMER1.timerStartTimer    = true;
 TIMER1.peripheral.$assign = "TIMG0";
 
 TIMER2.timerClkDiv        = 8;
@@ -109,6 +110,7 @@ TIMER2.timerPeriod        = "10 ms";
 TIMER2.timerMode          = "PERIODIC";
 TIMER2.interrupts         = ["ZERO"];
 TIMER2.$name              = "ENCODER_TIM1";
+TIMER2.timerStartTimer    = true;
 TIMER2.peripheral.$assign = "TIMG6";
 
 UART1.$name                            = "grayscale";

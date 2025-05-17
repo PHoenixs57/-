@@ -1,11 +1,8 @@
 #include "motor.h"
-#include "ti/driverlib/m0p/dl_core.h"
-#include "ti_msp_dl_config.h"
-#include <cstdint>
 #include <stdbool.h>
-#define MAX_DUTY 1000
+/*反转为前进 即AIN0为0，AIN1为1*/
 
-motor_prams left_motor, right_motor;
+motor_prams motor[MOTOR_NUM];
 
 void gpio_set(GPIO_Regs* gpio, uint32_t pins, uint8_t value)
 {
@@ -14,8 +11,13 @@ void gpio_set(GPIO_Regs* gpio, uint32_t pins, uint8_t value)
 
 void motor_init(void)
 {
-    DL_TimerG_setCaptureCompareValue(PWM_0_INST, 0, GPIO_PWM_0_C0_IDX);
-    DL_TimerG_setCaptureCompareValue(PWM_1_INST, 0, GPIO_PWM_1_C1_IDX);
+    // 初始状态：左右电机均制动
+    gpio_set(MOTOR_PORT, AIN0, HIGH);
+    gpio_set(MOTOR_PORT, AIN1, HIGH);
+    gpio_set(MOTOR_PORT, BIN0, HIGH);
+    gpio_set(MOTOR_PORT, BIN1, HIGH);
+    DL_TimerG_setCaptureCompareValue(PWM0_TIM, 0, PWM0_CHANNEL);
+    DL_TimerG_setCaptureCompareValue(PWM1_TIM, 0, PWM1_CHANNEL);
 }
 
 // ------------------------------------
@@ -24,13 +26,11 @@ void motor_init(void)
 // @param   ccIndex 选择定时器通道
 // @param   duty    占空比（0~1000）
 // @return  void
-// Sample usage: motor_duty(PWM_0_INST, GPIO_PWM_0_C0_IDX, 0)
+// Sample usage: motor_duty(PWM0_TIM, PWM0_CHANNEL, 0)
 // ------------------------------------
 void motor_duty(GPTIMER_Regs *gptimer, DL_TIMER_CC_INDEX ccIndex, int duty)
 {
   if (duty < 0) duty = 0;
   else if (duty >= MAX_DUTY) duty = MAX_DUTY;
   DL_TimerG_setCaptureCompareValue(gptimer, duty, ccIndex);
-  gpio_set(GPIOA_PORT, GPIOA_AIN0_PIN, motor_dir);
-  gpio_set(GPIOA_PORT, GPIOA_AIN1_PIN, !motor_dir);
 }

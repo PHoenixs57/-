@@ -10,6 +10,7 @@ GEN_OPTS__FLAG := @"./device.opt"
 GEN_CMDS__FLAG := -Wl,-l"./device_linker.cmd" 
 
 ORDERED_OBJS += \
+"./isr.o" \
 "./main.o" \
 "./ti_msp_dl_config.o" \
 "./startup_mspm0g350x_ticlang.o" \
@@ -17,6 +18,7 @@ ORDERED_OBJS += \
 "./hardware/grayscale.o" \
 "./hardware/gyroscpe.o" \
 "./hardware/motor.o" \
+"./pid/pid.o" \
 $(GEN_CMDS__FLAG) \
 -Wl,-ldevice.cmd.genlibs \
 -Wl,-llibc.a \
@@ -31,9 +33,11 @@ RMDIR := RMDIR /S/Q
 -include subdir_vars.mk
 -include OLED/subdir_vars.mk
 -include hardware/subdir_vars.mk
+-include pid/subdir_vars.mk
 -include subdir_rules.mk
 -include OLED/subdir_rules.mk
 -include hardware/subdir_rules.mk
+-include pid/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -164,8 +168,8 @@ all: $(OBJS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "OLED\oled.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" 
-	-$(RM) "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "OLED\oled.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" 
+	-$(RM) "isr.o" "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "OLED\oled.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" "pid\pid.o" 
+	-$(RM) "isr.d" "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "OLED\oled.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" "pid\pid.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

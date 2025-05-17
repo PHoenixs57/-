@@ -17,10 +17,10 @@ void GROUP1_IRQHandler(void)
                 // 检查E0B是低电平还是高电平, 低电平正转，高电平反转
                 if (DL_GPIO_readPins(ENCODER_PORT, ENCODER_E0B_PIN))
                 {
-                    left.encoder_count++;
+                    motor[LEFT_MOTOR].encoder_count++;
                 }
                 else {
-                    left.encoder_count--;
+                    motor[LEFT_MOTOR].encoder_count--;
                 }
             }
             // 如果E1A下降，则触发中断
@@ -29,10 +29,10 @@ void GROUP1_IRQHandler(void)
                 // 检查E1B是低电平还是高电平, 低电平正转，高电平反转
                 if (DL_GPIO_readPins(ENCODER_PORT, ENCODER_E1B_PIN))
                 {
-                    right.encoder_count++;
+                    motor[RIGHT_MOTOR].encoder_count++;
                 }
                 else {
-                    right.encoder_count--;
+                    motor[RIGHT_MOTOR].encoder_count--;
                 }
             }
         break;
@@ -44,12 +44,12 @@ void GROUP1_IRQHandler(void)
 void TIMER_0_INST_IRQHandler(void)
 {
     //如果产生了定时器中断 If a timer interrupt occurs
-    switch( DL_TimerG_getPendingInterrupt(TIMER_0_INST) )
+    switch( DL_TimerG_getPendingInterrupt(ENCODER_TIM0_INST) )
     {
         case DL_TIMER_IIDX_ZERO://如果是0溢出中断 If it is 0 overflow interrupt
             // 进行速度计算
-            left_motor.speed_now = left_motor.encoder_count;
-            left_motor.encoder_count = 0;
+            motor[LEFT_MOTOR].speed_now = motor[LEFT_MOTOR].encoder_count;
+            motor[LEFT_MOTOR].encoder_count = 0;
             break;
 
         default://其他的定时器中断 Other timer interrupts
@@ -61,12 +61,12 @@ void TIMER_0_INST_IRQHandler(void)
 void TIMER_1_INST_IRQHandler(void)
 {
     //如果产生了定时器中断 If a timer interrupt occurs
-    switch( DL_TimerG_getPendingInterrupt(TIMER_0_INST) )
+    switch( DL_TimerG_getPendingInterrupt(ENCODER_TIM1_INST) )
     {
         case DL_TIMER_IIDX_ZERO://如果是0溢出中断 If it is 0 overflow interrupt
             //进行速度计算
-            right_motor.speed_now = right_motor.encoder_count;
-            right_motor.encoder_count = 0;
+            motor[RIGHT_MOTOR].speed_now = motor[RIGHT_MOTOR].encoder_count;
+            motor[RIGHT_MOTOR].encoder_count = 0;
             break;
 
         default://其他的定时器中断 Other timer interrupts

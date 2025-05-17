@@ -127,4 +127,5 @@ SUBDIRS := \
 . \
 OLED \
 hardware \
+pid \
 
