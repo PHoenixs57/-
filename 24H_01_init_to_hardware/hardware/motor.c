@@ -12,7 +12,7 @@ void gpio_set(GPIO_Regs* gpio, uint32_t pins, uint8_t value)
 void motor_init(void)
 {
     // 初始状态：左右电机均制动
-    gpio_set(MOTOR_PORT, AIN0, HIGH);
+    gpio_set(MOTOR_PORT, AIN0, LOW);
     gpio_set(MOTOR_PORT, AIN1, HIGH);
     gpio_set(MOTOR_PORT, BIN0, HIGH);
     gpio_set(MOTOR_PORT, BIN1, HIGH);
