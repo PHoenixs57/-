@@ -101,62 +101,62 @@ extern "C" {
 #define PWM_1_INST_CLK_FREQ                                             32000000
 /* GPIO defines for channel 0 */
 #define GPIO_PWM_1_C0_PORT                                                 GPIOA
-#define GPIO_PWM_1_C0_PIN                                         DL_GPIO_PIN_21
-#define GPIO_PWM_1_C0_IOMUX                                      (IOMUX_PINCM46)
-#define GPIO_PWM_1_C0_IOMUX_FUNC                     IOMUX_PINCM46_PF_TIMA0_CCP0
+#define GPIO_PWM_1_C0_PIN                                          DL_GPIO_PIN_0
+#define GPIO_PWM_1_C0_IOMUX                                       (IOMUX_PINCM1)
+#define GPIO_PWM_1_C0_IOMUX_FUNC                      IOMUX_PINCM1_PF_TIMA0_CCP0
 #define GPIO_PWM_1_C0_IDX                                    DL_TIMER_CC_0_INDEX
 /* GPIO defines for channel 1 */
 #define GPIO_PWM_1_C1_PORT                                                 GPIOA
-#define GPIO_PWM_1_C1_PIN                                         DL_GPIO_PIN_22
-#define GPIO_PWM_1_C1_IOMUX                                      (IOMUX_PINCM47)
-#define GPIO_PWM_1_C1_IOMUX_FUNC                     IOMUX_PINCM47_PF_TIMA0_CCP1
+#define GPIO_PWM_1_C1_PIN                                          DL_GPIO_PIN_1
+#define GPIO_PWM_1_C1_IOMUX                                       (IOMUX_PINCM2)
+#define GPIO_PWM_1_C1_IOMUX_FUNC                      IOMUX_PINCM2_PF_TIMA0_CCP1
 #define GPIO_PWM_1_C1_IDX                                    DL_TIMER_CC_1_INDEX
 
 
 
 
 /* Defines for I2C_OLED */
-#define I2C_OLED_INST                                                       I2C0
-#define I2C_OLED_INST_IRQHandler                                 I2C0_IRQHandler
-#define I2C_OLED_INST_INT_IRQN                                     I2C0_INT_IRQn
+#define I2C_OLED_INST                                                       I2C1
+#define I2C_OLED_INST_IRQHandler                                 I2C1_IRQHandler
+#define I2C_OLED_INST_INT_IRQN                                     I2C1_INT_IRQn
 #define I2C_OLED_BUS_SPEED_HZ                                             100000
 #define GPIO_I2C_OLED_SDA_PORT                                             GPIOA
-#define GPIO_I2C_OLED_SDA_PIN                                     DL_GPIO_PIN_28
-#define GPIO_I2C_OLED_IOMUX_SDA                                   (IOMUX_PINCM3)
-#define GPIO_I2C_OLED_IOMUX_SDA_FUNC                    IOMUX_PINCM3_PF_I2C0_SDA
+#define GPIO_I2C_OLED_SDA_PIN                                     DL_GPIO_PIN_16
+#define GPIO_I2C_OLED_IOMUX_SDA                                  (IOMUX_PINCM38)
+#define GPIO_I2C_OLED_IOMUX_SDA_FUNC                   IOMUX_PINCM38_PF_I2C1_SDA
 #define GPIO_I2C_OLED_SCL_PORT                                             GPIOA
-#define GPIO_I2C_OLED_SCL_PIN                                     DL_GPIO_PIN_31
-#define GPIO_I2C_OLED_IOMUX_SCL                                   (IOMUX_PINCM6)
-#define GPIO_I2C_OLED_IOMUX_SCL_FUNC                    IOMUX_PINCM6_PF_I2C0_SCL
+#define GPIO_I2C_OLED_SCL_PIN                                     DL_GPIO_PIN_15
+#define GPIO_I2C_OLED_IOMUX_SCL                                  (IOMUX_PINCM37)
+#define GPIO_I2C_OLED_IOMUX_SCL_FUNC                   IOMUX_PINCM37_PF_I2C1_SCL
 
 
-/* Defines for grayscale */
-#define grayscale_INST                                                     UART1
-#define grayscale_INST_IRQHandler                               UART1_IRQHandler
-#define grayscale_INST_INT_IRQN                                   UART1_INT_IRQn
-#define GPIO_grayscale_RX_PORT                                             GPIOA
-#define GPIO_grayscale_TX_PORT                                             GPIOA
-#define GPIO_grayscale_RX_PIN                                     DL_GPIO_PIN_18
-#define GPIO_grayscale_TX_PIN                                     DL_GPIO_PIN_17
-#define GPIO_grayscale_IOMUX_RX                                  (IOMUX_PINCM40)
-#define GPIO_grayscale_IOMUX_TX                                  (IOMUX_PINCM39)
-#define GPIO_grayscale_IOMUX_RX_FUNC                   IOMUX_PINCM40_PF_UART1_RX
-#define GPIO_grayscale_IOMUX_TX_FUNC                   IOMUX_PINCM39_PF_UART1_TX
-#define grayscale_BAUD_RATE                                               (9600)
-#define grayscale_IBRD_32_MHZ_9600_BAUD                                    (208)
-#define grayscale_FBRD_32_MHZ_9600_BAUD                                     (21)
+/* Defines for UART_0 */
+#define UART_0_INST                                                        UART0
+#define UART_0_INST_IRQHandler                                  UART0_IRQHandler
+#define UART_0_INST_INT_IRQN                                      UART0_INT_IRQn
+#define GPIO_UART_0_RX_PORT                                                GPIOA
+#define GPIO_UART_0_TX_PORT                                                GPIOA
+#define GPIO_UART_0_RX_PIN                                        DL_GPIO_PIN_31
+#define GPIO_UART_0_TX_PIN                                        DL_GPIO_PIN_28
+#define GPIO_UART_0_IOMUX_RX                                      (IOMUX_PINCM6)
+#define GPIO_UART_0_IOMUX_TX                                      (IOMUX_PINCM3)
+#define GPIO_UART_0_IOMUX_RX_FUNC                       IOMUX_PINCM6_PF_UART0_RX
+#define GPIO_UART_0_IOMUX_TX_FUNC                       IOMUX_PINCM3_PF_UART0_TX
+#define UART_0_BAUD_RATE                                                (115200)
+#define UART_0_IBRD_32_MHZ_115200_BAUD                                      (17)
+#define UART_0_FBRD_32_MHZ_115200_BAUD                                      (23)
 /* Defines for Gyroscpe */
-#define Gyroscpe_INST                                                      UART0
-#define Gyroscpe_INST_IRQHandler                                UART0_IRQHandler
-#define Gyroscpe_INST_INT_IRQN                                    UART0_INT_IRQn
+#define Gyroscpe_INST                                                      UART1
+#define Gyroscpe_INST_IRQHandler                                UART1_IRQHandler
+#define Gyroscpe_INST_INT_IRQN                                    UART1_INT_IRQn
 #define GPIO_Gyroscpe_RX_PORT                                              GPIOA
 #define GPIO_Gyroscpe_TX_PORT                                              GPIOA
-#define GPIO_Gyroscpe_RX_PIN                                       DL_GPIO_PIN_1
-#define GPIO_Gyroscpe_TX_PIN                                       DL_GPIO_PIN_0
-#define GPIO_Gyroscpe_IOMUX_RX                                    (IOMUX_PINCM2)
-#define GPIO_Gyroscpe_IOMUX_TX                                    (IOMUX_PINCM1)
-#define GPIO_Gyroscpe_IOMUX_RX_FUNC                     IOMUX_PINCM2_PF_UART0_RX
-#define GPIO_Gyroscpe_IOMUX_TX_FUNC                     IOMUX_PINCM1_PF_UART0_TX
+#define GPIO_Gyroscpe_RX_PIN                                      DL_GPIO_PIN_18
+#define GPIO_Gyroscpe_TX_PIN                                      DL_GPIO_PIN_17
+#define GPIO_Gyroscpe_IOMUX_RX                                   (IOMUX_PINCM40)
+#define GPIO_Gyroscpe_IOMUX_TX                                   (IOMUX_PINCM39)
+#define GPIO_Gyroscpe_IOMUX_RX_FUNC                    IOMUX_PINCM40_PF_UART1_RX
+#define GPIO_Gyroscpe_IOMUX_TX_FUNC                    IOMUX_PINCM39_PF_UART1_TX
 #define Gyroscpe_BAUD_RATE                                                (9600)
 #define Gyroscpe_IBRD_32_MHZ_9600_BAUD                                     (208)
 #define Gyroscpe_FBRD_32_MHZ_9600_BAUD                                      (21)
@@ -210,7 +210,7 @@ void SYSCFG_DL_SYSCTL_init(void);
 void SYSCFG_DL_PWM_0_init(void);
 void SYSCFG_DL_PWM_1_init(void);
 void SYSCFG_DL_I2C_OLED_init(void);
-void SYSCFG_DL_grayscale_init(void);
+void SYSCFG_DL_UART_0_init(void);
 void SYSCFG_DL_Gyroscpe_init(void);
 
 

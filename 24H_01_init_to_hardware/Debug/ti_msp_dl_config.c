@@ -56,7 +56,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_PWM_0_init();
     SYSCFG_DL_PWM_1_init();
     SYSCFG_DL_I2C_OLED_init();
-    SYSCFG_DL_grayscale_init();
+    SYSCFG_DL_UART_0_init();
     SYSCFG_DL_Gyroscpe_init();
     /* Ensure backup structures have no valid state */
 	gPWM_0Backup.backupRdy 	= false;
@@ -96,7 +96,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_TimerA_reset(PWM_0_INST);
     DL_TimerA_reset(PWM_1_INST);
     DL_I2C_reset(I2C_OLED_INST);
-    DL_UART_Main_reset(grayscale_INST);
+    DL_UART_Main_reset(UART_0_INST);
     DL_UART_Main_reset(Gyroscpe_INST);
 
     DL_GPIO_enablePower(GPIOA);
@@ -104,7 +104,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_TimerA_enablePower(PWM_0_INST);
     DL_TimerA_enablePower(PWM_1_INST);
     DL_I2C_enablePower(I2C_OLED_INST);
-    DL_UART_Main_enablePower(grayscale_INST);
+    DL_UART_Main_enablePower(UART_0_INST);
     DL_UART_Main_enablePower(Gyroscpe_INST);
     delay_cycles(POWER_STARTUP_DELAY);
 }
@@ -133,9 +133,9 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
     DL_GPIO_enableHiZ(GPIO_I2C_OLED_IOMUX_SCL);
 
     DL_GPIO_initPeripheralOutputFunction(
-        GPIO_grayscale_IOMUX_TX, GPIO_grayscale_IOMUX_TX_FUNC);
+        GPIO_UART_0_IOMUX_TX, GPIO_UART_0_IOMUX_TX_FUNC);
     DL_GPIO_initPeripheralInputFunction(
-        GPIO_grayscale_IOMUX_RX, GPIO_grayscale_IOMUX_RX_FUNC);
+        GPIO_UART_0_IOMUX_RX, GPIO_UART_0_IOMUX_RX_FUNC);
     DL_GPIO_initPeripheralOutputFunction(
         GPIO_Gyroscpe_IOMUX_TX, GPIO_Gyroscpe_IOMUX_TX_FUNC);
     DL_GPIO_initPeripheralInputFunction(
@@ -326,12 +326,12 @@ SYSCONFIG_WEAK void SYSCFG_DL_I2C_OLED_init(void) {
 }
 
 
-static const DL_UART_Main_ClockConfig ggrayscaleClockConfig = {
+static const DL_UART_Main_ClockConfig gUART_0ClockConfig = {
     .clockSel    = DL_UART_MAIN_CLOCK_BUSCLK,
     .divideRatio = DL_UART_MAIN_CLOCK_DIVIDE_RATIO_1
 };
 
-static const DL_UART_Main_Config ggrayscaleConfig = {
+static const DL_UART_Main_Config gUART_0Config = {
     .mode        = DL_UART_MAIN_MODE_NORMAL,
     .direction   = DL_UART_MAIN_DIRECTION_TX_RX,
     .flowControl = DL_UART_MAIN_FLOW_CONTROL_NONE,
@@ -340,22 +340,26 @@ static const DL_UART_Main_Config ggrayscaleConfig = {
     .stopBits    = DL_UART_MAIN_STOP_BITS_ONE
 };
 
-SYSCONFIG_WEAK void SYSCFG_DL_grayscale_init(void)
+SYSCONFIG_WEAK void SYSCFG_DL_UART_0_init(void)
 {
-    DL_UART_Main_setClockConfig(grayscale_INST, (DL_UART_Main_ClockConfig *) &ggrayscaleClockConfig);
+    DL_UART_Main_setClockConfig(UART_0_INST, (DL_UART_Main_ClockConfig *) &gUART_0ClockConfig);
 
-    DL_UART_Main_init(grayscale_INST, (DL_UART_Main_Config *) &ggrayscaleConfig);
+    DL_UART_Main_init(UART_0_INST, (DL_UART_Main_Config *) &gUART_0Config);
     /*
      * Configure baud rate by setting oversampling and baud rate divisors.
-     *  Target baud rate: 9600
-     *  Actual baud rate: 9600.24
+     *  Target baud rate: 115200
+     *  Actual baud rate: 115211.52
      */
-    DL_UART_Main_setOversampling(grayscale_INST, DL_UART_OVERSAMPLING_RATE_16X);
-    DL_UART_Main_setBaudRateDivisor(grayscale_INST, grayscale_IBRD_32_MHZ_9600_BAUD, grayscale_FBRD_32_MHZ_9600_BAUD);
+    DL_UART_Main_setOversampling(UART_0_INST, DL_UART_OVERSAMPLING_RATE_16X);
+    DL_UART_Main_setBaudRateDivisor(UART_0_INST, UART_0_IBRD_32_MHZ_115200_BAUD, UART_0_FBRD_32_MHZ_115200_BAUD);
 
 
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(UART_0_INST,
+                                 DL_UART_MAIN_INTERRUPT_RX);
 
-    DL_UART_Main_enable(grayscale_INST);
+
+    DL_UART_Main_enable(UART_0_INST);
 }
 
 static const DL_UART_Main_ClockConfig gGyroscpeClockConfig = {
