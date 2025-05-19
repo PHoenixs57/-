@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "24H_01_init_to_hardware",
+            "type": "ccs-debug",
+            "request": "launch",
+            "project": "24H_01_init_to_hardware"
+        }
+    ]
+}

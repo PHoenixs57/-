@@ -84,15 +84,15 @@ extern "C" {
 #define PWM_0_INST_CLK_FREQ                                             32000000
 /* GPIO defines for channel 0 */
 #define GPIO_PWM_0_C0_PORT                                                 GPIOA
-#define GPIO_PWM_0_C0_PIN                                         DL_GPIO_PIN_23
-#define GPIO_PWM_0_C0_IOMUX                                      (IOMUX_PINCM53)
-#define GPIO_PWM_0_C0_IOMUX_FUNC                     IOMUX_PINCM53_PF_TIMG7_CCP0
+#define GPIO_PWM_0_C0_PIN                                         DL_GPIO_PIN_26
+#define GPIO_PWM_0_C0_IOMUX                                      (IOMUX_PINCM59)
+#define GPIO_PWM_0_C0_IOMUX_FUNC                     IOMUX_PINCM59_PF_TIMG7_CCP0
 #define GPIO_PWM_0_C0_IDX                                    DL_TIMER_CC_0_INDEX
 /* GPIO defines for channel 1 */
 #define GPIO_PWM_0_C1_PORT                                                 GPIOA
-#define GPIO_PWM_0_C1_PIN                                          DL_GPIO_PIN_2
-#define GPIO_PWM_0_C1_IOMUX                                       (IOMUX_PINCM7)
-#define GPIO_PWM_0_C1_IOMUX_FUNC                      IOMUX_PINCM7_PF_TIMG7_CCP1
+#define GPIO_PWM_0_C1_PIN                                         DL_GPIO_PIN_24
+#define GPIO_PWM_0_C1_IOMUX                                      (IOMUX_PINCM54)
+#define GPIO_PWM_0_C1_IOMUX_FUNC                     IOMUX_PINCM54_PF_TIMG7_CCP1
 #define GPIO_PWM_0_C1_IDX                                    DL_TIMER_CC_1_INDEX
 
 /* Defines for PWM_1 */
@@ -102,15 +102,15 @@ extern "C" {
 #define PWM_1_INST_CLK_FREQ                                             32000000
 /* GPIO defines for channel 0 */
 #define GPIO_PWM_1_C0_PORT                                                 GPIOA
-#define GPIO_PWM_1_C0_PIN                                          DL_GPIO_PIN_1
-#define GPIO_PWM_1_C0_IOMUX                                       (IOMUX_PINCM2)
-#define GPIO_PWM_1_C0_IOMUX_FUNC                      IOMUX_PINCM2_PF_TIMG8_CCP0
+#define GPIO_PWM_1_C0_PIN                                         DL_GPIO_PIN_23
+#define GPIO_PWM_1_C0_IOMUX                                      (IOMUX_PINCM53)
+#define GPIO_PWM_1_C0_IOMUX_FUNC                     IOMUX_PINCM53_PF_TIMG8_CCP0
 #define GPIO_PWM_1_C0_IDX                                    DL_TIMER_CC_0_INDEX
 /* GPIO defines for channel 1 */
 #define GPIO_PWM_1_C1_PORT                                                 GPIOA
-#define GPIO_PWM_1_C1_PIN                                          DL_GPIO_PIN_0
-#define GPIO_PWM_1_C1_IOMUX                                       (IOMUX_PINCM1)
-#define GPIO_PWM_1_C1_IOMUX_FUNC                      IOMUX_PINCM1_PF_TIMG8_CCP1
+#define GPIO_PWM_1_C1_PIN                                          DL_GPIO_PIN_2
+#define GPIO_PWM_1_C1_IOMUX                                       (IOMUX_PINCM7)
+#define GPIO_PWM_1_C1_IOMUX_FUNC                      IOMUX_PINCM7_PF_TIMG8_CCP1
 #define GPIO_PWM_1_C1_IDX                                    DL_TIMER_CC_1_INDEX
 
 
@@ -135,13 +135,13 @@ extern "C" {
 #define I2C_OLED_INST_INT_IRQN                                     I2C0_INT_IRQn
 #define I2C_OLED_BUS_SPEED_HZ                                             100000
 #define GPIO_I2C_OLED_SDA_PORT                                             GPIOA
-#define GPIO_I2C_OLED_SDA_PIN                                     DL_GPIO_PIN_28
-#define GPIO_I2C_OLED_IOMUX_SDA                                   (IOMUX_PINCM3)
-#define GPIO_I2C_OLED_IOMUX_SDA_FUNC                    IOMUX_PINCM3_PF_I2C0_SDA
+#define GPIO_I2C_OLED_SDA_PIN                                     DL_GPIO_PIN_10
+#define GPIO_I2C_OLED_IOMUX_SDA                                  (IOMUX_PINCM21)
+#define GPIO_I2C_OLED_IOMUX_SDA_FUNC                   IOMUX_PINCM21_PF_I2C0_SDA
 #define GPIO_I2C_OLED_SCL_PORT                                             GPIOA
-#define GPIO_I2C_OLED_SCL_PIN                                     DL_GPIO_PIN_31
-#define GPIO_I2C_OLED_IOMUX_SCL                                   (IOMUX_PINCM6)
-#define GPIO_I2C_OLED_IOMUX_SCL_FUNC                    IOMUX_PINCM6_PF_I2C0_SCL
+#define GPIO_I2C_OLED_SCL_PIN                                     DL_GPIO_PIN_11
+#define GPIO_I2C_OLED_IOMUX_SCL                                  (IOMUX_PINCM22)
+#define GPIO_I2C_OLED_IOMUX_SCL_FUNC                   IOMUX_PINCM22_PF_I2C0_SCL
 
 
 /* Defines for grayscale */
@@ -156,9 +156,9 @@ extern "C" {
 #define GPIO_grayscale_IOMUX_TX                                  (IOMUX_PINCM46)
 #define GPIO_grayscale_IOMUX_RX_FUNC                   IOMUX_PINCM47_PF_UART2_RX
 #define GPIO_grayscale_IOMUX_TX_FUNC                   IOMUX_PINCM46_PF_UART2_TX
-#define grayscale_BAUD_RATE                                               (9600)
-#define grayscale_IBRD_32_MHZ_9600_BAUD                                    (208)
-#define grayscale_FBRD_32_MHZ_9600_BAUD                                     (21)
+#define grayscale_BAUD_RATE                                             (115200)
+#define grayscale_IBRD_32_MHZ_115200_BAUD                                   (17)
+#define grayscale_FBRD_32_MHZ_115200_BAUD                                   (23)
 /* Defines for Gyroscpe */
 #define Gyroscpe_INST                                                      UART1
 #define Gyroscpe_INST_IRQHandler                                UART1_IRQHandler
@@ -180,17 +180,23 @@ extern "C" {
 #define Bluetooth_INST_INT_IRQN                                   UART0_INT_IRQn
 #define GPIO_Bluetooth_RX_PORT                                             GPIOA
 #define GPIO_Bluetooth_TX_PORT                                             GPIOA
-#define GPIO_Bluetooth_RX_PIN                                     DL_GPIO_PIN_11
-#define GPIO_Bluetooth_TX_PIN                                     DL_GPIO_PIN_10
-#define GPIO_Bluetooth_IOMUX_RX                                  (IOMUX_PINCM22)
-#define GPIO_Bluetooth_IOMUX_TX                                  (IOMUX_PINCM21)
-#define GPIO_Bluetooth_IOMUX_RX_FUNC                   IOMUX_PINCM22_PF_UART0_RX
-#define GPIO_Bluetooth_IOMUX_TX_FUNC                   IOMUX_PINCM21_PF_UART0_TX
+#define GPIO_Bluetooth_RX_PIN                                      DL_GPIO_PIN_1
+#define GPIO_Bluetooth_TX_PIN                                      DL_GPIO_PIN_0
+#define GPIO_Bluetooth_IOMUX_RX                                   (IOMUX_PINCM2)
+#define GPIO_Bluetooth_IOMUX_TX                                   (IOMUX_PINCM1)
+#define GPIO_Bluetooth_IOMUX_RX_FUNC                    IOMUX_PINCM2_PF_UART0_RX
+#define GPIO_Bluetooth_IOMUX_TX_FUNC                    IOMUX_PINCM1_PF_UART0_TX
 #define Bluetooth_BAUD_RATE                                               (9600)
 #define Bluetooth_IBRD_4_MHZ_9600_BAUD                                      (26)
 #define Bluetooth_FBRD_4_MHZ_9600_BAUD                                       (3)
 
 
+
+
+
+/* Defines for DMA_CH0 */
+#define DMA_CH0_CHAN_ID                                                      (0)
+#define grayscale_INST_DMA_TRIGGER                           (DMA_UART2_RX_TRIG)
 
 
 
@@ -244,6 +250,7 @@ void SYSCFG_DL_I2C_OLED_init(void);
 void SYSCFG_DL_grayscale_init(void);
 void SYSCFG_DL_Gyroscpe_init(void);
 void SYSCFG_DL_Bluetooth_init(void);
+void SYSCFG_DL_DMA_init(void);
 
 
 bool SYSCFG_DL_saveConfiguration(void);

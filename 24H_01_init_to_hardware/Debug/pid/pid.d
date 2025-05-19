@@ -1,7 +1,8 @@
 # FIXED
 
-pid/pid.o: ../pid/pid.c ../pid/pid.h \
- D:/TI/code/2024H/2024H/24H_01_init_to_hardware/hardware/motor.h \
+pid/pid.o: ../pid/pid.c \
+ C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/pid/pid.h \
+ C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/hardware/motor.h \
  ti_msp_dl_config.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/msp/msp.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/DeviceFamily.h \
@@ -76,9 +77,9 @@ pid/pid.o: ../pid/pid.c ../pid/pid.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h
 
-../pid/pid.h:
+C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/pid/pid.h:
 
-D:/TI/code/2024H/2024H/24H_01_init_to_hardware/hardware/motor.h:
+C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/hardware/motor.h:
 
 ti_msp_dl_config.h:
 

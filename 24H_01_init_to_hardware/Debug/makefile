@@ -14,7 +14,7 @@ ORDERED_OBJS += \
 "./main.o" \
 "./ti_msp_dl_config.o" \
 "./startup_mspm0g350x_ticlang.o" \
-"./OLED/oled.o" \
+"./delay/delay.o" \
 "./hardware/bluetooth.o" \
 "./hardware/grayscale.o" \
 "./hardware/gyroscpe.o" \
@@ -32,11 +32,11 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include OLED/subdir_vars.mk
+-include delay/subdir_vars.mk
 -include hardware/subdir_vars.mk
 -include pid/subdir_vars.mk
 -include subdir_rules.mk
--include OLED/subdir_rules.mk
+-include delay/subdir_rules.mk
 -include hardware/subdir_rules.mk
 -include pid/subdir_rules.mk
 -include objects.mk
@@ -155,7 +155,7 @@ all: $(OBJS) $(GEN_CMDS)
 24H_01_init_to_hardware.out: $(OBJS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: Arm Linker'
-	"C:/ti/ccstheia141/ccs/tools/compiler/ti-cgt-armllvm_3.2.2.LTS/bin/tiarmclang.exe" @"device.opt"  -march=thumbv6m -mcpu=cortex-m0plus -mfloat-abi=soft -mlittle-endian -mthumb -O0 -gdwarf-3 -Wl,-m"24H_01_init_to_hardware.map" -Wl,-i"C:/ti/mspm0_sdk_2_01_00_03/source" -Wl,-i"D:/TI/code/2024H/2024H/24H_01_init_to_hardware" -Wl,-i"D:/TI/code/2024H/2024H/24H_01_init_to_hardware/Debug/syscfg" -Wl,-i"C:/ti/ccstheia141/ccs/tools/compiler/ti-cgt-armllvm_3.2.2.LTS/lib" -Wl,--diag_wrap=off -Wl,--display_error_number -Wl,--warn_sections -Wl,--xml_link_info="24H_01_init_to_hardware_linkInfo.xml" -Wl,--rom_model -o "24H_01_init_to_hardware.out" $(ORDERED_OBJS)
+	"C:/ti/ccstheia141/ccs/tools/compiler/ti-cgt-armllvm_3.2.2.LTS/bin/tiarmclang.exe" @"device.opt"  -march=thumbv6m -mcpu=cortex-m0plus -mfloat-abi=soft -mlittle-endian -mthumb -O0 -gdwarf-3 -Wl,-m"24H_01_init_to_hardware.map" -Wl,-i"C:/ti/mspm0_sdk_2_01_00_03/source" -Wl,-i"C:/Users/Ag plus/code/2024H/24H_01_init_to_hardware" -Wl,-i"C:/Users/Ag plus/code/2024H/24H_01_init_to_hardware/Debug/syscfg" -Wl,-i"C:/ti/ccstheia141/ccs/tools/compiler/ti-cgt-armllvm_3.2.2.LTS/lib" -Wl,--diag_wrap=off -Wl,--display_error_number -Wl,--warn_sections -Wl,--xml_link_info="24H_01_init_to_hardware_linkInfo.xml" -Wl,--rom_model -o "24H_01_init_to_hardware.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -169,8 +169,8 @@ all: $(OBJS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "isr.o" "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "OLED\oled.o" "hardware\bluetooth.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" "pid\pid.o" 
-	-$(RM) "isr.d" "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "OLED\oled.d" "hardware\bluetooth.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" "pid\pid.d" 
+	-$(RM) "isr.o" "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "delay\delay.o" "hardware\bluetooth.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" "pid\pid.o" 
+	-$(RM) "isr.d" "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "delay\delay.d" "hardware\bluetooth.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" "pid\pid.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

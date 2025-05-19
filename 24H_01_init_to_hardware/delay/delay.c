@@ -2,23 +2,22 @@
 
 volatile unsigned int delay_times = 0;
 
-//´îÅäµÎ´ð¶¨Ê±Æ÷ÊµÏÖµÄ¾«È·usÑÓÊ±	Accurate us delay with tick timer
 void delay_us(unsigned long __us) 
 {
     uint32_t ticks;
     uint32_t told, tnow, tcnt = 38;
 
-    // ¼ÆËãÐèÒªµÄÊ±ÖÓÊý = ÑÓ³ÙÎ¢ÃëÊý * Ã¿Î¢ÃëµÄÊ±ÖÓÊý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ = ï¿½Ó³ï¿½Î¢ï¿½ï¿½ï¿½ï¿½ * Ã¿Î¢ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 	//The number of clocks required for calculation = the number of microseconds of delay * the number of clocks per microsecond
     ticks = __us * (32000000 / 1000000);
 
-    // »ñÈ¡µ±Ç°µÄSysTickÖµ
+    // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½SysTickÖµ
 	//Get the current SysTick value
     told = SysTick->VAL;
 
     while (1)
     {
-        // ÖØ¸´Ë¢ÐÂ»ñÈ¡µ±Ç°µÄSysTickÖµ
+        // ï¿½Ø¸ï¿½Ë¢ï¿½Â»ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½SysTickÖµ
 		//Repeatedly refresh to get the current SysTick value
         tnow = SysTick->VAL;
 
@@ -31,21 +30,21 @@ void delay_us(unsigned long __us)
 
             told = tnow;
 
-            // Èç¹û´ïµ½ÁËÐèÒªµÄÊ±ÖÓÊý£¬¾ÍÍË³öÑ­»·
+            // ï¿½ï¿½ï¿½ï¿½ïµ½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½Ñ­ï¿½ï¿½
 			//If the required number of clocks is reached, exit the loop
             if (tcnt >= ticks)
                 break;
         }
     }
 }
-//´îÅäµÎ´ð¶¨Ê±Æ÷ÊµÏÖµÄ¾«È·msÑÓÊ±
+//ï¿½ï¿½ï¿½ï¿½Î´ï¿½Ê±ï¿½ï¿½Êµï¿½ÖµÄ¾ï¿½È·msï¿½ï¿½Ê±
 //Accurate ms delay with tick timer
 void delay_ms(unsigned long ms) 
 {
 	delay_us( ms * 1000 );
 }
 
-//µÎ´ð¶¨Ê±Æ÷ÖÐ¶Ï´¦Àí	Tick timer interrupt handling
+//ï¿½Î´ï¿½Ê±ï¿½ï¿½ï¿½Ð¶Ï´ï¿½ï¿½ï¿½	Tick timer interrupt handling
 void SysTick_Handler(void)
 {
 	if(delay_times != 0)

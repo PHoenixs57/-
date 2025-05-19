@@ -1,7 +1,7 @@
 # FIXED
 
 hardware/bluetooth.o: ../hardware/bluetooth.c \
- D:/TI/code/2024H/2024H/24H_01_init_to_hardware/hardware/bluetooth.h \
+ C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/hardware/bluetooth.h \
  ti_msp_dl_config.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/msp/msp.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/DeviceFamily.h \
@@ -76,7 +76,7 @@ hardware/bluetooth.o: ../hardware/bluetooth.c \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h
 
-D:/TI/code/2024H/2024H/24H_01_init_to_hardware/hardware/bluetooth.h:
+C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/hardware/bluetooth.h:
 
 ti_msp_dl_config.h:
 

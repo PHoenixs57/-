@@ -61,6 +61,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_grayscale_init();
     SYSCFG_DL_Gyroscpe_init();
     SYSCFG_DL_Bluetooth_init();
+    SYSCFG_DL_DMA_init();
     /* Ensure backup structures have no valid state */
 	gPWM_0Backup.backupRdy 	= false;
 	gENCODER_TIM1Backup.backupRdy 	= false;
@@ -105,6 +106,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_UART_Main_reset(Gyroscpe_INST);
     DL_UART_Main_reset(Bluetooth_INST);
 
+
     DL_GPIO_enablePower(GPIOA);
     DL_GPIO_enablePower(GPIOB);
     DL_TimerG_enablePower(PWM_0_INST);
@@ -115,6 +117,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
     DL_UART_Main_enablePower(grayscale_INST);
     DL_UART_Main_enablePower(Gyroscpe_INST);
     DL_UART_Main_enablePower(Bluetooth_INST);
+
     delay_cycles(POWER_STARTUP_DELAY);
 }
 
@@ -441,13 +444,23 @@ SYSCONFIG_WEAK void SYSCFG_DL_grayscale_init(void)
     DL_UART_Main_init(grayscale_INST, (DL_UART_Main_Config *) &ggrayscaleConfig);
     /*
      * Configure baud rate by setting oversampling and baud rate divisors.
-     *  Target baud rate: 9600
-     *  Actual baud rate: 9600.24
+     *  Target baud rate: 115200
+     *  Actual baud rate: 115211.52
      */
     DL_UART_Main_setOversampling(grayscale_INST, DL_UART_OVERSAMPLING_RATE_16X);
-    DL_UART_Main_setBaudRateDivisor(grayscale_INST, grayscale_IBRD_32_MHZ_9600_BAUD, grayscale_FBRD_32_MHZ_9600_BAUD);
+    DL_UART_Main_setBaudRateDivisor(grayscale_INST, grayscale_IBRD_32_MHZ_115200_BAUD, grayscale_FBRD_32_MHZ_115200_BAUD);
 
 
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(grayscale_INST,
+                                 DL_UART_MAIN_INTERRUPT_DMA_DONE_RX);
+
+    /* Configure DMA Receive Event */
+    DL_UART_Main_enableDMAReceiveEvent(grayscale_INST, DL_UART_DMA_INTERRUPT_RX);
+    /* Configure FIFOs */
+    DL_UART_Main_enableFIFOs(grayscale_INST);
+    DL_UART_Main_setRXFIFOThreshold(grayscale_INST, DL_UART_RX_FIFO_LEVEL_ONE_ENTRY);
+    DL_UART_Main_setTXFIFOThreshold(grayscale_INST, DL_UART_TX_FIFO_LEVEL_1_2_EMPTY);
 
     DL_UART_Main_enable(grayscale_INST);
 }
@@ -519,4 +532,24 @@ SYSCONFIG_WEAK void SYSCFG_DL_Bluetooth_init(void)
 
     DL_UART_Main_enable(Bluetooth_INST);
 }
+
+static const DL_DMA_Config gDMA_CH0Config = {
+    .transferMode   = DL_DMA_FULL_CH_REPEAT_SINGLE_TRANSFER_MODE,
+    .extendedMode   = DL_DMA_NORMAL_MODE,
+    .destIncrement  = DL_DMA_ADDR_INCREMENT,
+    .srcIncrement   = DL_DMA_ADDR_UNCHANGED,
+    .destWidth      = DL_DMA_WIDTH_BYTE,
+    .srcWidth       = DL_DMA_WIDTH_BYTE,
+    .trigger        = grayscale_INST_DMA_TRIGGER,
+    .triggerType    = DL_DMA_TRIGGER_TYPE_EXTERNAL,
+};
+
+SYSCONFIG_WEAK void SYSCFG_DL_DMA_CH0_init(void)
+{
+    DL_DMA_initChannel(DMA, DMA_CH0_CHAN_ID , (DL_DMA_Config *) &gDMA_CH0Config);
+}
+SYSCONFIG_WEAK void SYSCFG_DL_DMA_init(void){
+    SYSCFG_DL_DMA_CH0_init();
+}
+
 
