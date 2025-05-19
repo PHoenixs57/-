@@ -1,6 +1,7 @@
 # FIXED
 
 main.o: ../main.c \
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/main.h \
  ti_msp_dl_config.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/msp/msp.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/devices/DeviceFamily.h \
@@ -74,7 +75,13 @@ main.o: ../main.c \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/dl_wwdt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h \
  C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h \
- C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/OLED/oled.h
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/motor.h \
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/bluetooth.h \
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/delay/delay.h \
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/grayscale.h \
+ C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/gyroscpe.h
+
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/main.h:
 
 ti_msp_dl_config.h:
 
@@ -222,4 +229,12 @@ C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_interrupt.h:
 
 C:/ti/mspm0_sdk_2_01_00_03/source/ti/driverlib/m0p/dl_systick.h:
 
-C:/Users/Ag\ plus/code/2024H/24H_01_init_to_hardware/OLED/oled.h:
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/motor.h:
+
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/bluetooth.h:
+
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/delay/delay.h:
+
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/grayscale.h:
+
+C:/Users/86130/Desktop/1/workspace_ccstheia/24H_01_init_to_hardware/hardware/gyroscpe.h:
