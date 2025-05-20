@@ -8,7 +8,7 @@ int main(void)
 {
     SYSCFG_DL_init(); 
     Bluetooth_Init();
-    uart0_send_string(Bluetooth_BUF);
+    UART_SendByDMA(Bluetooth_BUF,strlen(Bluetooth_BUF));
     GrayScale_Init();
     GrayScale_Start();
     while (1){}

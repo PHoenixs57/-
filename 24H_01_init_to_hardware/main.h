@@ -5,8 +5,7 @@
 #include "bluetooth.h"
 #include "delay.h"
 #include "grayscale.h"
-
-
+#include <string.h>
 
 
 #endif

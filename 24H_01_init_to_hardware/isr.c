@@ -10,8 +10,7 @@ void grayscale_INST_IRQHandler(void)
         //$D,x1:0,x2:0,x3:0,x4:0,x5:0,x6:0,x7:0,x8:0#
         //X1亮灯（在黑线上）其它探头灯不亮 B01111111
         //GrayScale_Send_String(gRxGraycScalePacket);
-        uart0_send_string(gRxGraycScalePacket);
-        uart0_send_string("\r\n");
+        UART_SendByDMA(gRxGraycScalePacket,UART_GrayScale_PACKET_SIZE);
         if((gRxGraycScalePacket[0]=='$')&&(gRxGraycScalePacket[UART_GrayScale_PACKET_SIZE-1]=='#'))
             {
                 for(uint8_t i=0;i<8;i++)
@@ -32,23 +31,23 @@ void grayscale_INST_IRQHandler(void)
     }
 }
 //蓝牙调试串口的中断服务函数 Serial port interrupt service function
-void Bluetooth_INST_IRQHandler(void)
-{
-    volatile unsigned char uart_data = 0;
-    //如果产生了串口中断 If a serial port interrupt occurs
-    switch( DL_UART_getPendingInterrupt(Bluetooth_INST) )
-    {
-        case DL_UART_IIDX_RX://如果是接收中断 If it is a receive interrupt
-            //接发送过来的数据保存在变量中 The data sent is saved in the variable
-            uart_data = DL_UART_Main_receiveData(Bluetooth_INST);
-            //将保存的数据再发送出去 Send the saved data again
-            uart0_send_char(uart_data);
-            break;
+// void Bluetooth_INST_IRQHandler(void)
+// {
+//     volatile unsigned char uart_data = 0;
+//     //如果产生了串口中断 If a serial port interrupt occurs
+//     switch( DL_UART_getPendingInterrupt(Bluetooth_INST) )
+//     {
+//         case DL_UART_IIDX_RX://如果是接收中断 If it is a receive interrupt
+//             //接发送过来的数据保存在变量中 The data sent is saved in the variable
+//             uart_data = DL_UART_Main_receiveData(Bluetooth_INST);
+//             //将保存的数据再发送出去 Send the saved data again
+//             uart0_send_char(uart_data);
+//             break;
 
-        default://其他的串口中断 Other serial port interrupts
-            break;
-    }
-}
+//         default://其他的串口中断 Other serial port interrupts
+//             break;
+//     }
+// }
 
 //Group1的中断服务函数 Interrupt service function of Group1
 void GROUP1_IRQHandler(void)

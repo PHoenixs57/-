@@ -174,29 +174,33 @@ extern "C" {
 #define Gyroscpe_BAUD_RATE                                                (9600)
 #define Gyroscpe_IBRD_32_MHZ_9600_BAUD                                     (208)
 #define Gyroscpe_FBRD_32_MHZ_9600_BAUD                                      (21)
-/* Defines for Bluetooth */
-#define Bluetooth_INST                                                     UART0
-#define Bluetooth_INST_IRQHandler                               UART0_IRQHandler
-#define Bluetooth_INST_INT_IRQN                                   UART0_INT_IRQn
-#define GPIO_Bluetooth_RX_PORT                                             GPIOA
-#define GPIO_Bluetooth_TX_PORT                                             GPIOA
-#define GPIO_Bluetooth_RX_PIN                                      DL_GPIO_PIN_1
-#define GPIO_Bluetooth_TX_PIN                                      DL_GPIO_PIN_0
-#define GPIO_Bluetooth_IOMUX_RX                                   (IOMUX_PINCM2)
-#define GPIO_Bluetooth_IOMUX_TX                                   (IOMUX_PINCM1)
-#define GPIO_Bluetooth_IOMUX_RX_FUNC                    IOMUX_PINCM2_PF_UART0_RX
-#define GPIO_Bluetooth_IOMUX_TX_FUNC                    IOMUX_PINCM1_PF_UART0_TX
-#define Bluetooth_BAUD_RATE                                               (9600)
-#define Bluetooth_IBRD_4_MHZ_9600_BAUD                                      (26)
-#define Bluetooth_FBRD_4_MHZ_9600_BAUD                                       (3)
+/* Defines for UART_0 */
+#define UART_0_INST                                                        UART0
+#define UART_0_INST_IRQHandler                                  UART0_IRQHandler
+#define UART_0_INST_INT_IRQN                                      UART0_INT_IRQn
+#define GPIO_UART_0_RX_PORT                                                GPIOA
+#define GPIO_UART_0_TX_PORT                                                GPIOA
+#define GPIO_UART_0_RX_PIN                                         DL_GPIO_PIN_1
+#define GPIO_UART_0_TX_PIN                                         DL_GPIO_PIN_0
+#define GPIO_UART_0_IOMUX_RX                                      (IOMUX_PINCM2)
+#define GPIO_UART_0_IOMUX_TX                                      (IOMUX_PINCM1)
+#define GPIO_UART_0_IOMUX_RX_FUNC                       IOMUX_PINCM2_PF_UART0_RX
+#define GPIO_UART_0_IOMUX_TX_FUNC                       IOMUX_PINCM1_PF_UART0_TX
+#define UART_0_BAUD_RATE                                                  (9600)
+#define UART_0_IBRD_4_MHZ_9600_BAUD                                         (26)
+#define UART_0_FBRD_4_MHZ_9600_BAUD                                          (3)
 
 
 
 
 
 /* Defines for DMA_CH0 */
-#define DMA_CH0_CHAN_ID                                                      (0)
+#define DMA_CH0_CHAN_ID                                                      (1)
 #define grayscale_INST_DMA_TRIGGER                           (DMA_UART2_RX_TRIG)
+
+/* Defines for DMA_CH1 */
+#define DMA_CH1_CHAN_ID                                                      (0)
+#define UART_0_INST_DMA_TRIGGER                              (DMA_UART0_TX_TRIG)
 
 
 
@@ -249,7 +253,7 @@ void SYSCFG_DL_ENCODER_TIM1_init(void);
 void SYSCFG_DL_I2C_OLED_init(void);
 void SYSCFG_DL_grayscale_init(void);
 void SYSCFG_DL_Gyroscpe_init(void);
-void SYSCFG_DL_Bluetooth_init(void);
+void SYSCFG_DL_UART_0_init(void);
 void SYSCFG_DL_DMA_init(void);
 
 
