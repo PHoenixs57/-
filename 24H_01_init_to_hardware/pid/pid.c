@@ -1,6 +1,9 @@
 #include "pid.h"
 #include "motor.h"
 
+
+pid_t motorA, motorB;
+
 /**
  * @brief 初始化 PID 控制器参数
  * 

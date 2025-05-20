@@ -1,5 +1,9 @@
+#include "pid.h"
 #include "ti_msp_dl_config.h"
 #include "motor.h"
+#include "bluetooth.h"
+#include "delay.h"
+#include "pid.h"
 
 //Group1的中断服务函数 Interrupt service function of Group1
 void GROUP1_IRQHandler(void)
@@ -18,6 +22,7 @@ void GROUP1_IRQHandler(void)
                 if (DL_GPIO_readPins(ENCODER_PORT, ENCODER_E0B_PIN))
                 {
                     motor[LEFT_MOTOR].encoder_count++;
+                    uart0_send_char(motor[LEFT_MOTOR].encoder_count);
                 }
                 else {
                     motor[LEFT_MOTOR].encoder_count--;
@@ -73,3 +78,40 @@ void TIMER_1_INST_IRQHandler(void)
             break;
     }
 }
+
+//串口的中断服务函数 Serial port interrupt service function
+void Bluetooth_INST_IRQHandler(void)
+{
+    //如果产生了串口中断 If a serial port interrupt occurs
+    switch( DL_UART_getPendingInterrupt(Bluetooth_INST) )
+    {
+        case DL_UART_IIDX_RX://如果是接收中断 If it is a receive interrupt
+            //接发送过来的数据保存在变量中 The data sent is saved in the variable
+            uart_data = DL_UART_Main_receiveData(Bluetooth_INST);
+            //将保存的数据再发送出去 Send the saved data again
+            uart0_send_string("hello\r\n");
+            if (uart_data == 'o') {
+                DL_GPIO_setPins(LED1_PORT, LED1_PIN_2_PIN);
+                motorA.target += 5;
+            }
+            else if(uart_data == 'f') {
+                DL_GPIO_clearPins(LED1_PORT, LED1_PIN_2_PIN);
+                motorA.target -= 5;
+            }
+            break;
+
+        default://其他的串口中断 Other serial port interrupts
+            break;
+    }
+}
+
+
+//滴答定时器的中断服务函数 Tick ??timer interrupt service function
+void SysTick_Handler(void)
+{
+    if( delay_times != 0 )
+    {
+        delay_times--;
+    }
+}
+

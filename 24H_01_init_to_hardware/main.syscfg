@@ -8,22 +8,24 @@
 /**
  * Import the modules used in this configuration.
  */
-const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
-const GPIO1  = GPIO.addInstance();
-const GPIO2  = GPIO.addInstance();
-const I2C    = scripting.addModule("/ti/driverlib/I2C", {}, false);
-const I2C1   = I2C.addInstance();
-const PWM    = scripting.addModule("/ti/driverlib/PWM", {}, false);
-const PWM1   = PWM.addInstance();
-const PWM2   = PWM.addInstance();
-const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
-const TIMER  = scripting.addModule("/ti/driverlib/TIMER", {}, false);
-const TIMER1 = TIMER.addInstance();
-const TIMER2 = TIMER.addInstance();
-const UART   = scripting.addModule("/ti/driverlib/UART", {}, false);
-const UART1  = UART.addInstance();
-const UART2  = UART.addInstance();
-const UART3  = UART.addInstance();
+const GPIO    = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1   = GPIO.addInstance();
+const GPIO2   = GPIO.addInstance();
+const GPIO3   = GPIO.addInstance();
+const I2C     = scripting.addModule("/ti/driverlib/I2C", {}, false);
+const I2C1    = I2C.addInstance();
+const PWM     = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1    = PWM.addInstance();
+const PWM2    = PWM.addInstance();
+const SYSCTL  = scripting.addModule("/ti/driverlib/SYSCTL");
+const SYSTICK = scripting.addModule("/ti/driverlib/SYSTICK");
+const TIMER   = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1  = TIMER.addInstance();
+const TIMER2  = TIMER.addInstance();
+const UART    = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1   = UART.addInstance();
+const UART2   = UART.addInstance();
+const UART3   = UART.addInstance();
 
 /**
  * Write custom configuration values to the imported modules.
@@ -64,12 +66,18 @@ GPIO2.associatedPins[2].$name            = "E1A";
 GPIO2.associatedPins[2].direction        = "INPUT";
 GPIO2.associatedPins[2].interruptEn      = true;
 GPIO2.associatedPins[2].polarity         = "FALL";
-GPIO2.associatedPins[2].assignedPin      = "17";
+GPIO2.associatedPins[2].assignedPin      = "20";
 GPIO2.associatedPins[3].$name            = "E1B";
 GPIO2.associatedPins[3].direction        = "INPUT";
 GPIO2.associatedPins[3].ioStructure      = "SD";
-GPIO2.associatedPins[3].assignedPin      = "16";
 GPIO2.associatedPins[3].internalResistor = "PULL_UP";
+GPIO2.associatedPins[3].assignedPin      = "24";
+
+GPIO3.$name                              = "LED1";
+GPIO3.port                               = "PORTB";
+GPIO3.associatedPins[0].$name            = "PIN_2";
+GPIO3.associatedPins[0].internalResistor = "PULL_DOWN";
+GPIO3.associatedPins[0].assignedPin      = "2";
 
 I2C1.basicEnableController             = true;
 I2C1.$name                             = "I2C_OLED";
@@ -104,6 +112,12 @@ PWM2.ccp1PinConfig.$name = "ti_driverlib_gpio_GPIOPinGeneric9";
 SYSCTL.forceDefaultClkConfig = true;
 SYSCTL.clockTreeEn           = true;
 
+SYSTICK.periodEnable      = true;
+SYSTICK.period            = 32000;
+SYSTICK.interruptEnable   = true;
+SYSTICK.systickEnable     = true;
+SYSTICK.interruptPriority = "3";
+
 TIMER1.timerClkDiv                      = 8;
 TIMER1.timerClkPrescale                 = 100;
 TIMER1.timerPeriod                      = "10 ms";
@@ -111,6 +125,7 @@ TIMER1.timerMode                        = "PERIODIC";
 TIMER1.interrupts                       = ["ZERO"];
 TIMER1.$name                            = "ENCODER_TIM0";
 TIMER1.timerStartTimer                  = true;
+TIMER1.interruptPriority                = "2";
 TIMER1.peripheral.$assignAllowConflicts = "TIMG0";
 
 TIMER2.timerClkDiv        = 8;
@@ -120,9 +135,12 @@ TIMER2.timerMode          = "PERIODIC";
 TIMER2.interrupts         = ["ZERO"];
 TIMER2.$name              = "ENCODER_TIM1";
 TIMER2.timerStartTimer    = true;
+TIMER2.interruptPriority  = "2";
 TIMER2.peripheral.$assign = "TIMG6";
 
 UART1.$name                            = "grayscale";
+UART1.peripheral.rxPin.$assign         = "PA22";
+UART1.peripheral.txPin.$assign         = "PA21";
 UART1.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
 UART1.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
 UART1.txPinConfig.onlyInternalResistor = scripting.forceWrite(false);
@@ -147,8 +165,9 @@ UART2.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric5";
 UART3.$name                            = "Bluetooth";
 UART3.uartClkSrc                       = "MFCLK";
 UART3.enabledInterrupts                = ["RX"];
-UART3.peripheral.rxPin.$assign         = "PA11";
-UART3.peripheral.txPin.$assign         = "PA10";
+UART3.interruptPriority                = "0";
+UART3.peripheral.rxPin.$assign         = "PA1";
+UART3.peripheral.txPin.$assign         = "PA0";
 UART3.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric10";
 UART3.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
 UART3.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
@@ -173,18 +192,17 @@ Board.peripheral.swclkPin.$suggestSolution   = "PA20";
 Board.peripheral.swdioPin.$suggestSolution   = "PA19";
 GPIO2.associatedPins[0].pin.$suggestSolution = "PB19";
 GPIO2.associatedPins[1].pin.$suggestSolution = "PB18";
-GPIO2.associatedPins[2].pin.$suggestSolution = "PB17";
-GPIO2.associatedPins[3].pin.$suggestSolution = "PB16";
+GPIO2.associatedPins[2].pin.$suggestSolution = "PB20";
+GPIO2.associatedPins[3].pin.$suggestSolution = "PB24";
+GPIO3.associatedPins[0].pin.$suggestSolution = "PB2";
 I2C1.peripheral.$suggestSolution             = "I2C0";
-I2C1.peripheral.sdaPin.$suggestSolution      = "PA28";
-I2C1.peripheral.sclPin.$suggestSolution      = "PA31";
-PWM1.peripheral.ccp0Pin.$suggestSolution     = "PA23";
-PWM1.peripheral.ccp1Pin.$suggestSolution     = "PA2";
-PWM2.peripheral.ccp0Pin.$suggestSolution     = "PA1";
-PWM2.peripheral.ccp1Pin.$suggestSolution     = "PA0";
+I2C1.peripheral.sdaPin.$suggestSolution      = "PA10";
+I2C1.peripheral.sclPin.$suggestSolution      = "PA11";
+PWM1.peripheral.ccp0Pin.$suggestSolution     = "PA26";
+PWM1.peripheral.ccp1Pin.$suggestSolution     = "PA24";
+PWM2.peripheral.ccp0Pin.$suggestSolution     = "PA23";
+PWM2.peripheral.ccp1Pin.$suggestSolution     = "PA2";
 UART1.peripheral.$suggestSolution            = "UART2";
-UART1.peripheral.rxPin.$suggestSolution      = "PA22";
-UART1.peripheral.txPin.$suggestSolution      = "PA21";
 UART2.peripheral.$suggestSolution            = "UART1";
 UART2.peripheral.rxPin.$suggestSolution      = "PA18";
 UART2.peripheral.txPin.$suggestSolution      = "PA17";

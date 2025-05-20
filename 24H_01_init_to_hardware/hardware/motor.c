@@ -14,7 +14,7 @@ void motor_init(void)
     // 初始状态：左右电机均制动
     gpio_set(MOTOR_PORT, AIN0, LOW);
     gpio_set(MOTOR_PORT, AIN1, HIGH);
-    gpio_set(MOTOR_PORT, BIN0, HIGH);
+    gpio_set(MOTOR_PORT, BIN0, LOW);
     gpio_set(MOTOR_PORT, BIN1, HIGH);
     DL_TimerG_setCaptureCompareValue(PWM0_TIM, 0, PWM0_CHANNEL);
     DL_TimerG_setCaptureCompareValue(PWM1_TIM, 0, PWM1_CHANNEL);
