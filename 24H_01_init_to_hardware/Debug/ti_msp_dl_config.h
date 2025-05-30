@@ -171,9 +171,9 @@ extern "C" {
 #define GPIO_Gyroscpe_IOMUX_TX                                   (IOMUX_PINCM39)
 #define GPIO_Gyroscpe_IOMUX_RX_FUNC                    IOMUX_PINCM40_PF_UART1_RX
 #define GPIO_Gyroscpe_IOMUX_TX_FUNC                    IOMUX_PINCM39_PF_UART1_TX
-#define Gyroscpe_BAUD_RATE                                                (9600)
-#define Gyroscpe_IBRD_32_MHZ_9600_BAUD                                     (208)
-#define Gyroscpe_FBRD_32_MHZ_9600_BAUD                                      (21)
+#define Gyroscpe_BAUD_RATE                                              (115200)
+#define Gyroscpe_IBRD_32_MHZ_115200_BAUD                                    (17)
+#define Gyroscpe_FBRD_32_MHZ_115200_BAUD                                    (23)
 /* Defines for UART_0 */
 #define UART_0_INST                                                        UART0
 #define UART_0_INST_IRQHandler                                  UART0_IRQHandler
@@ -198,9 +198,9 @@ extern "C" {
 #define DMA_CH0_CHAN_ID                                                      (1)
 #define grayscale_INST_DMA_TRIGGER                           (DMA_UART2_RX_TRIG)
 
-/* Defines for DMA_CH1 */
-#define DMA_CH1_CHAN_ID                                                      (0)
-#define UART_0_INST_DMA_TRIGGER                              (DMA_UART0_TX_TRIG)
+/* Defines for DMA_CH2 */
+#define DMA_CH2_CHAN_ID                                                      (0)
+#define Gyroscpe_INST_DMA_TRIGGER                            (DMA_UART1_RX_TRIG)
 
 
 

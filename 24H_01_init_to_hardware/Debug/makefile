@@ -14,7 +14,6 @@ ORDERED_OBJS += \
 "./main.o" \
 "./ti_msp_dl_config.o" \
 "./startup_mspm0g350x_ticlang.o" \
-"./delay/delay.o" \
 "./hardware/bluetooth.o" \
 "./hardware/grayscale.o" \
 "./hardware/gyroscpe.o" \
@@ -32,11 +31,9 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include delay/subdir_vars.mk
 -include hardware/subdir_vars.mk
 -include pid/subdir_vars.mk
 -include subdir_rules.mk
--include delay/subdir_rules.mk
 -include hardware/subdir_rules.mk
 -include pid/subdir_rules.mk
 -include objects.mk
@@ -169,8 +166,8 @@ all: $(OBJS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "isr.o" "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "delay\delay.o" "hardware\bluetooth.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" "pid\pid.o" 
-	-$(RM) "isr.d" "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "delay\delay.d" "hardware\bluetooth.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" "pid\pid.d" 
+	-$(RM) "isr.o" "main.o" "ti_msp_dl_config.o" "startup_mspm0g350x_ticlang.o" "hardware\bluetooth.o" "hardware\grayscale.o" "hardware\gyroscpe.o" "hardware\motor.o" "pid\pid.o" 
+	-$(RM) "isr.d" "main.d" "ti_msp_dl_config.d" "startup_mspm0g350x_ticlang.d" "hardware\bluetooth.d" "hardware\grayscale.d" "hardware\gyroscpe.d" "hardware\motor.d" "pid\pid.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

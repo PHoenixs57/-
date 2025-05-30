@@ -10,7 +10,7 @@ void grayscale_INST_IRQHandler(void)
         //$D,x1:0,x2:0,x3:0,x4:0,x5:0,x6:0,x7:0,x8:0#
         //X1亮灯（在黑线上）其它探头灯不亮 B01111111
         //GrayScale_Send_String(gRxGraycScalePacket);
-        UART_SendByDMA(gRxGraycScalePacket,UART_GrayScale_PACKET_SIZE);
+        //UART_SendByDMA(gRxGraycScalePacket,UART_GrayScale_PACKET_SIZE);
         if((gRxGraycScalePacket[0]=='$')&&(gRxGraycScalePacket[UART_GrayScale_PACKET_SIZE-1]=='#'))
             {
                 for(uint8_t i=0;i<8;i++)
@@ -30,6 +30,60 @@ void grayscale_INST_IRQHandler(void)
             break;
     }
 }
+
+void Gyroscpe_INST_IRQHandler(void)
+{
+    int i;
+    // uart0_send_char('A');
+    switch (DL_UART_Main_getPendingInterrupt(Gyroscpe_INST)) {
+        case DL_UART_MAIN_IIDX_DMA_DONE_RX:
+            //wt61_rx_buffer
+            
+            uart0_send_char('A');
+            delay_ms(500);
+            if(strlen(wt61_rx_buffer)==0) uart0_send_string("0");
+            else if (strlen(wt61_rx_buffer)==44) uart0_send_string("44");
+            uart0_send_string(wt61_rx_buffer);
+            // for(i=0;i<11;i++)
+            // {
+            //     if((wt61_rx_buffer[i] == WT61_FRAME_HEADER)&&(wt61_rx_buffer[i] ==WT61_TYPE_ACCEL))
+            //     {
+            //         store_wt61_data(&wt61_rx_buffer[i]);
+            //         Gyroscpe_Stop();
+            //         break;
+            //     }
+            // }
+            // if(i==11)
+            // uart0_send_string("rx_err\n");
+
+            
+            // if (wt61_rx_buffer[0] == WT61_FRAME_HEADER) 
+            // {
+            //     if( wt61_rx_buffer[1] == WT61_TYPE_ACCEL) 
+            //     {
+            //         store_ACCEL_data();
+            //     }
+            //     else if(wt61_rx_buffer[1] == WT61_TYPE_GYRO)
+            //     {
+            //         store_GYRO_data();
+            //     }
+            //     else if(wt61_rx_buffer[1] == WT61_TYPE_ANGLE)
+            //     {
+            //         store_ANGLE_data();
+            //     }
+            // }
+            break;
+        default:
+            break;
+    }
+}
+// void SysTick_Handler(void)
+// {
+//         if( delay_times != 0 )
+//         {
+//                 delay_times--;
+//         }
+// }
 //蓝牙调试串口的中断服务函数 Serial port interrupt service function
 // void Bluetooth_INST_IRQHandler(void)
 // {

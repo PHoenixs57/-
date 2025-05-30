@@ -486,13 +486,23 @@ SYSCONFIG_WEAK void SYSCFG_DL_Gyroscpe_init(void)
     DL_UART_Main_init(Gyroscpe_INST, (DL_UART_Main_Config *) &gGyroscpeConfig);
     /*
      * Configure baud rate by setting oversampling and baud rate divisors.
-     *  Target baud rate: 9600
-     *  Actual baud rate: 9600.24
+     *  Target baud rate: 115200
+     *  Actual baud rate: 115211.52
      */
     DL_UART_Main_setOversampling(Gyroscpe_INST, DL_UART_OVERSAMPLING_RATE_16X);
-    DL_UART_Main_setBaudRateDivisor(Gyroscpe_INST, Gyroscpe_IBRD_32_MHZ_9600_BAUD, Gyroscpe_FBRD_32_MHZ_9600_BAUD);
+    DL_UART_Main_setBaudRateDivisor(Gyroscpe_INST, Gyroscpe_IBRD_32_MHZ_115200_BAUD, Gyroscpe_FBRD_32_MHZ_115200_BAUD);
 
 
+    /* Configure Interrupts */
+    DL_UART_Main_enableInterrupt(Gyroscpe_INST,
+                                 DL_UART_MAIN_INTERRUPT_DMA_DONE_RX);
+
+    /* Configure DMA Receive Event */
+    DL_UART_Main_enableDMAReceiveEvent(Gyroscpe_INST, DL_UART_DMA_INTERRUPT_RX);
+    /* Configure FIFOs */
+    DL_UART_Main_enableFIFOs(Gyroscpe_INST);
+    DL_UART_Main_setRXFIFOThreshold(Gyroscpe_INST, DL_UART_RX_FIFO_LEVEL_ONE_ENTRY);
+    DL_UART_Main_setTXFIFOThreshold(Gyroscpe_INST, DL_UART_TX_FIFO_LEVEL_1_2_EMPTY);
 
     DL_UART_Main_enable(Gyroscpe_INST);
 }
@@ -525,17 +535,6 @@ SYSCONFIG_WEAK void SYSCFG_DL_UART_0_init(void)
     DL_UART_Main_setBaudRateDivisor(UART_0_INST, UART_0_IBRD_4_MHZ_9600_BAUD, UART_0_FBRD_4_MHZ_9600_BAUD);
 
 
-    /* Configure Interrupts */
-    DL_UART_Main_enableInterrupt(UART_0_INST,
-                                 DL_UART_MAIN_INTERRUPT_DMA_DONE_TX |
-                                 DL_UART_MAIN_INTERRUPT_EOT_DONE);
-
-    /* Configure DMA Transmit Event */
-    DL_UART_Main_enableDMATransmitEvent(UART_0_INST);
-    /* Configure FIFOs */
-    DL_UART_Main_enableFIFOs(UART_0_INST);
-    DL_UART_Main_setRXFIFOThreshold(UART_0_INST, DL_UART_RX_FIFO_LEVEL_ONE_ENTRY);
-    DL_UART_Main_setTXFIFOThreshold(UART_0_INST, DL_UART_TX_FIFO_LEVEL_ONE_ENTRY);
 
     DL_UART_Main_enable(UART_0_INST);
 }
@@ -555,24 +554,24 @@ SYSCONFIG_WEAK void SYSCFG_DL_DMA_CH0_init(void)
 {
     DL_DMA_initChannel(DMA, DMA_CH0_CHAN_ID , (DL_DMA_Config *) &gDMA_CH0Config);
 }
-static const DL_DMA_Config gDMA_CH1Config = {
-    .transferMode   = DL_DMA_SINGLE_TRANSFER_MODE,
+static const DL_DMA_Config gDMA_CH2Config = {
+    .transferMode   = DL_DMA_FULL_CH_REPEAT_SINGLE_TRANSFER_MODE,
     .extendedMode   = DL_DMA_NORMAL_MODE,
-    .destIncrement  = DL_DMA_ADDR_UNCHANGED,
-    .srcIncrement   = DL_DMA_ADDR_INCREMENT,
+    .destIncrement  = DL_DMA_ADDR_INCREMENT,
+    .srcIncrement   = DL_DMA_ADDR_UNCHANGED,
     .destWidth      = DL_DMA_WIDTH_BYTE,
     .srcWidth       = DL_DMA_WIDTH_BYTE,
-    .trigger        = UART_0_INST_DMA_TRIGGER,
+    .trigger        = Gyroscpe_INST_DMA_TRIGGER,
     .triggerType    = DL_DMA_TRIGGER_TYPE_EXTERNAL,
 };
 
-SYSCONFIG_WEAK void SYSCFG_DL_DMA_CH1_init(void)
+SYSCONFIG_WEAK void SYSCFG_DL_DMA_CH2_init(void)
 {
-    DL_DMA_initChannel(DMA, DMA_CH1_CHAN_ID , (DL_DMA_Config *) &gDMA_CH1Config);
+    DL_DMA_initChannel(DMA, DMA_CH2_CHAN_ID , (DL_DMA_Config *) &gDMA_CH2Config);
 }
 SYSCONFIG_WEAK void SYSCFG_DL_DMA_init(void){
     SYSCFG_DL_DMA_CH0_init();
-    SYSCFG_DL_DMA_CH1_init();
+    SYSCFG_DL_DMA_CH2_init();
 }
 
 
